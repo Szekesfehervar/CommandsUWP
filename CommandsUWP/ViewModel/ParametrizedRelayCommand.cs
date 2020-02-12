@@ -9,12 +9,12 @@ namespace CommandsUWP.ViewModel
 {
     class ParametrizedRelayCommand : ICommand
     {
-        private readonly Action _execute;
+        private readonly Action<object> _execute;
         private readonly Func<bool> _canExecute;
 
         public event EventHandler CanExecuteChanged;
 
-        public ParametrizedRelayCommand(Action execute, Func<bool> canExecute)
+        public ParametrizedRelayCommand(Action<object> execute, Func<bool> canExecute)
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
@@ -29,7 +29,7 @@ namespace CommandsUWP.ViewModel
 
         public void Execute(object parameter)
         {
-            _execute();
+            _execute(parameter);
         }
 
         public void RaiseCanExecuteChanged()
